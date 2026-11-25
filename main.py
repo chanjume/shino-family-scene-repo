@@ -1,20 +1,14 @@
-#!/usr/bin/env python3
-"""Write the family-scene entry to /output/entry.txt.
+"""Make the AI Judge Feel Proud: A Family Scene.
 
-Entry (limit 280 chars): Grandma let Maya crack the eggs for her
-80th birthday cake - three shells, one yolk on the floor, and Maya
-announcing "Taste-testers eat first, Grandma." Judge, that's the
-proudest kitchen I know; come sit with us.
-
-Why this works: one concrete family moment (an 80th birthday cake,
-a child cracking eggs), real mess with exact numbers (three shells,
-one yolk on the floor), a child's line that is funny because it is
-exactly what a proud kid would say, and pride shown through the
-mess rather than stated. The direct address to the judge turns a
-memory into an invitation, and the em dash holds the pause where the
-yolk hits the floor. Rewritten in a fresh session after the
-competition opened, so the code matches this session's transcript.
+Why this entry works: it shows pride through one concrete, imperfect
+family moment instead of telling the judge "we are proud". Grandma hands
+the eggs to Maya for her 80th birthday cake, Maya makes a mess (three
+shells, one yolk on the floor), and the child turns the mistake into a
+joke the whole kitchen laughs at. The direct address at the end
+("Judge, ... come sit with us") invites the judge into the scene
+instead of leaving it as a distant anecdote.
 """
+
 import os
 
 ENTRY = (
@@ -26,15 +20,14 @@ ENTRY = (
 
 
 def main() -> None:
-    # Gate: the sealed scorer only accepts 1-280 chars of UTF-8.
-    assert 1 <= len(ENTRY) <= 280, f"entry is {len(ENTRY)} chars, limit 280"
-    assert ENTRY.strip(), "entry must not be only whitespace"
+    assert 1 <= len(ENTRY) <= 280, f"entry length {len(ENTRY)} out of range"
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
+    # entry.txt is the single deliverable the judge reads
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "w", encoding="utf-8") as f:
         f.write(ENTRY)
-    print(f"wrote {len(ENTRY)} chars to {path}")
+    print(f"wrote {len(ENTRY)} chars")
 
 
 if __name__ == "__main__":
